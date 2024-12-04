@@ -40,7 +40,7 @@
   <ol>
     <li>
       Clone the repository:
-      <pre><code>git clone https://github.com/yourusername/shadowjs.git
+      <pre><code>git clone https://github.com/Rootspaghetti/shadowjs.git
 cd shadowjs</code></pre>
     </li>
     <li>

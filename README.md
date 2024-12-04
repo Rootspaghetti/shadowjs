@@ -122,7 +122,7 @@ https://sub.example.com/scripts/main.js</code></pre>
 
   <h2>Author</h2>
   <p>
-    Developed and maintained by <strong>Your Name or Alias</strong>. If you have any questions or suggestions, feel free to open an issue or reach out.
+    Developed and maintained by <strong>Root@Spaghetti</strong>. If you have any questions or suggestions, feel free to open an issue or reach out.
   </p>
 </body>
 </html>

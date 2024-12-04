@@ -6,7 +6,7 @@
 </head>
 <body>
   <div style="text-align: center;">
-    <img src="docs/shadowjs-logo.png" alt="ShadowJS Logo" style="max-width: 200px; margin-bottom: 20px;">
+    <img src="shadowjs.jpg" alt="ShadowJS Logo" style="max-width: 200px; margin-bottom: 20px;">
   </div>
 
   <h1 style="text-align: center;">ShadowJS</h1>

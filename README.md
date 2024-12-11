@@ -21,7 +21,11 @@
 <h2>Installation</h2>
 <p>Install ShadowJS using the following command:</p>
 <pre>
-<code>go install github.com/Rootspaghetti/shadowjs@latest</code>
+<code>git clone https://github.com/Rootspaghetti/shadowjs
+cd shadowjs
+chmod +x shadowjs
+mv shadowjs /usr/local/bin
+</code>
 </pre>
 
 <h2>Usage</h2>
@@ -33,9 +37,9 @@
 </ul>
 <h2>Examples</h2>
 <div style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 14px;">
-  <p># scan a single domain<br>shadowjs -d example.com</p>
-  <p># scan using a subdomain list<br>shadowjs -subs subdomains.txt</p>
-  <p># save results to an output file<br>shadowjs -d example.com -o output.txt</p>
+  <p># scan a single domain<br>shadowjs.go -d example.com</p>
+  <p># scan using a subdomain list<br>shadowjs.go -subs subdomains.txt</p>
+  <p># save results to an output file<br>shadowjs.go -d example.com -o output.txt</p>
 </div>
 
 <h2>Contributing</h2>

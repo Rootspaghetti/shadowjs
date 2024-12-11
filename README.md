@@ -23,8 +23,8 @@
 <pre>
 <code>git clone https://github.com/Rootspaghetti/shadowjs
 cd shadowjs
-chmod +x shadowjs
-mv shadowjs /usr/local/bin
+chmod +x shadowjs.go
+mv shadowjs.go /usr/local/bin
 </code>
 </pre>
 

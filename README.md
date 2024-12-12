@@ -1,5 +1,4 @@
-<h1 align="center">
-  <img src="shadowjs.jpg" alt="ShadowJS" width="600">
+<h1 align="center">  <img src="shadowjs.jpg" alt="ShadowJS" width="600">
   <br>ShadowJS
 </h1>
 <p align="center">
@@ -24,7 +23,7 @@
 <code>git clone https://github.com/Rootspaghetti/shadowjs
 cd shadowjs
 chmod +x shadowjs.go
-mv shadowjs.go /usr/local/bin
+go run shadowjs.go -h
 </code>
 </pre>
 
@@ -37,9 +36,9 @@ mv shadowjs.go /usr/local/bin
 </ul>
 <h2>Examples</h2>
 <div style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 14px;">
-  <p># scan a single domain<br>shadowjs.go -d https://example.com</p>
-  <p># scan using a subdomain list<br>shadowjs.go -subs subdomains.txt</p>
-  <p># save results to an output file<br>shadowjs.go -d https://example.com -o output.txt</p>
+  <p># scan a single domain<br>go run shadowjs.go -d https://example.com</p>
+  <p># scan using a subdomain list<br>go run shadowjs.go -subs subdomains.txt</p>
+  <p># save results to an output file<br>go run shadowjs.go -d https://example.com -o output.txt</p>
 </div>
 
 <h2>Contributing</h2>

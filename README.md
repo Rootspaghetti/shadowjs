@@ -22,8 +22,9 @@
 <pre>
 <code>git clone https://github.com/Rootspaghetti/shadowjs
 cd shadowjs
-chmod +x shadowjs.go
-go run shadowjs.go -h
+go install -o shadowjs
+cp shadowjs /usr/local/bin
+shadowjs -h
 </code>
 </pre>
 

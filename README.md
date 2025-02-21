@@ -10,6 +10,11 @@
   Built for bug bounty hunters and penetration testers.
 </p>
 
+## New Features (v1.1.0)
+   - Added finding JS files loaded with `<link>` tags.
+   - Added capturing dynamic JS files inside Inline JavaScript.
+   - Added regex support for JSONP and dynamic JS files.
+
 <h2>Features</h2>
 <ul>
   <li>Detects JavaScript files on domains or subdomains.</li>

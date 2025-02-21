@@ -53,7 +53,7 @@ func fetchHTML(targetURL string) (string, int) {
 func findJSFiles(baseURL, html string) []string {
 	var jsFiles []string
 
-	// 1. <script src="..."> ile yüklenen JS dosyaları
+
 	reScriptSrc := regexp.MustCompile(`<script[^>]+src="([^"]+)"`)
 	matches := reScriptSrc.FindAllStringSubmatch(html, -1)
 	for _, match := range matches {
@@ -64,7 +64,7 @@ func findJSFiles(baseURL, html string) []string {
 		}
 	}
 
-	// 2. <link rel="preload" href="..."> ile yüklenen JS dosyaları
+	
 	reLinkHref := regexp.MustCompile(`<link[^>]+href="([^"]+)"[^>]+as="script"`)
 	matches = reLinkHref.FindAllStringSubmatch(html, -1)
 	for _, match := range matches {
@@ -75,7 +75,7 @@ func findJSFiles(baseURL, html string) []string {
 		}
 	}
 
-	// 3. Inline JavaScript içindeki harici JS dosyaları (örneğin: fetch, XMLHttpRequest)
+	
 	reInlineJS := regexp.MustCompile(`(fetch|XMLHttpRequest)\(['"]([^'"]+\.js)['"]`)
 	matches = reInlineJS.FindAllStringSubmatch(html, -1)
 	for _, match := range matches {
@@ -86,7 +86,7 @@ func findJSFiles(baseURL, html string) []string {
 		}
 	}
 
-	// 4. JSONP veya dinamik yüklenen JS dosyaları
+
 	reJSONP := regexp.MustCompile(`([^'"\s]+\.js)(?:\?[^'"\s]*)?`)
 	matches = reJSONP.FindAllStringSubmatch(html, -1)
 	for _, match := range matches {
@@ -152,7 +152,7 @@ func crawl(baseURL, currentURL string, wg *sync.WaitGroup, results *[]string) {
 		return
 	}
 
-	// JavaScript dosyalarını bul
+
 	jsFiles := findJSFiles(baseURL, html)
 	mutex.Lock()
 	for _, file := range jsFiles {

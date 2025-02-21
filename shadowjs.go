@@ -13,13 +13,14 @@ import (
 	"sync"
 )
 
-var visited = make(map[string]bool)
-var jsFileSet = make(map[string]bool) // URL'lere göre kontrol
-
-var mutex sync.Mutex
+var (
+	visited   = make(map[string]bool)
+	jsFileSet = make(map[string]bool)
+	mutex     sync.Mutex
+)
 
 func showBanner() {
-        banner := `
+	banner := `
 ____  _               _                  _ ____
 / ___|| |__   __ _  __| | _____      __  | / ___|
 \___ \| '_ \ / _` + "`" + ` |/ _` + "`" + ` |/ _ \ \ /\ / /  | \___ \
@@ -28,8 +29,8 @@ ____  _               _                  _ ____
             JavaScript Discovery Tool
 
 by:Root@Spaghetti
-        `
-        fmt.Println(banner)
+	`
+	fmt.Println(banner)
 }
 
 func fetchHTML(targetURL string) (string, int) {
@@ -51,9 +52,10 @@ func fetchHTML(targetURL string) (string, int) {
 
 func findJSFiles(baseURL, html string) []string {
 	var jsFiles []string
-	re := regexp.MustCompile(`<script[^>]+src="([^"]+)"`)
-	matches := re.FindAllStringSubmatch(html, -1)
 
+	// 1. <script src="..."> ile yüklenen JS dosyaları
+	reScriptSrc := regexp.MustCompile(`<script[^>]+src="([^"]+)"`)
+	matches := reScriptSrc.FindAllStringSubmatch(html, -1)
 	for _, match := range matches {
 		if len(match) > 1 {
 			jsURL := match[1]
@@ -61,6 +63,40 @@ func findJSFiles(baseURL, html string) []string {
 			jsFiles = append(jsFiles, fullURL)
 		}
 	}
+
+	// 2. <link rel="preload" href="..."> ile yüklenen JS dosyaları
+	reLinkHref := regexp.MustCompile(`<link[^>]+href="([^"]+)"[^>]+as="script"`)
+	matches = reLinkHref.FindAllStringSubmatch(html, -1)
+	for _, match := range matches {
+		if len(match) > 1 {
+			jsURL := match[1]
+			fullURL := toAbsoluteURL(baseURL, jsURL)
+			jsFiles = append(jsFiles, fullURL)
+		}
+	}
+
+	// 3. Inline JavaScript içindeki harici JS dosyaları (örneğin: fetch, XMLHttpRequest)
+	reInlineJS := regexp.MustCompile(`(fetch|XMLHttpRequest)\(['"]([^'"]+\.js)['"]`)
+	matches = reInlineJS.FindAllStringSubmatch(html, -1)
+	for _, match := range matches {
+		if len(match) > 2 {
+			jsURL := match[2]
+			fullURL := toAbsoluteURL(baseURL, jsURL)
+			jsFiles = append(jsFiles, fullURL)
+		}
+	}
+
+	// 4. JSONP veya dinamik yüklenen JS dosyaları
+	reJSONP := regexp.MustCompile(`([^'"\s]+\.js)(?:\?[^'"\s]*)?`)
+	matches = reJSONP.FindAllStringSubmatch(html, -1)
+	for _, match := range matches {
+		if len(match) > 1 {
+			jsURL := match[1]
+			fullURL := toAbsoluteURL(baseURL, jsURL)
+			jsFiles = append(jsFiles, fullURL)
+		}
+	}
+
 	return jsFiles
 }
 

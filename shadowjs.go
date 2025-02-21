@@ -156,7 +156,7 @@ func crawl(baseURL, currentURL string, wg *sync.WaitGroup, results *[]string) {
 	jsFiles := findJSFiles(baseURL, html)
 	mutex.Lock()
 	for _, file := range jsFiles {
-		if !jsFileSet[file] { // Eğer URL daha önce eklenmediyse
+		if !jsFileSet[file] {
 			jsFileSet[file] = true
 			*results = append(*results, file)
 			fmt.Println("Found JS:", file)
